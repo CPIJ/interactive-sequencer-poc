@@ -9,9 +9,18 @@ var snarePattern = [NONE, DRUMS.SNARE, NONE, DRUMS.SNARE, NONE, DRUMS.SNARE, NON
 function preload() {
     this.instrumentGroups.push(new InstrumentGroup([kickPattern, snarePattern]))
     this.timeMachine = new TimeMachine(bpm)
+    tracker = new Tracker(document.getElementById('myVideo'))
+    VideoPlayer.setup(document.getElementById('myVideo'))
 }
 
 function setup() {
+    createCanvas(500, 500)
+
+    tracker.onTrack(e => {
+        clear()
+        rect(e.x, e.y, e.width, e.height)
+    })
+
     this.timeMachine.onTick(() => {
 
         this.instrumentGroups.forEach((instrumentGroup) => {
@@ -33,3 +42,4 @@ function mousePressed() {
         this.timeMachine.start()
     }
 }
+
