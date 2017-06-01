@@ -1,4 +1,4 @@
-class TimeMachine {
+class BeatMachine {
     constructor(bpm) {
         this.interval = 60000 / bpm
         this.isPlaying = false

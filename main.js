@@ -1,5 +1,5 @@
 const BPM = 128;
-let timeMachine
+let beatMachine
 
 var instrumentGroups = []
 
@@ -8,9 +8,22 @@ var snarePattern = [NONE, DRUMS.SNARE, NONE, DRUMS.SNARE, NONE, DRUMS.SNARE, NON
 
 function preload() {
     this.instrumentGroups.push(new InstrumentGroup([kickPattern, snarePattern]))
-    this.timeMachine = new TimeMachine(BPM)
+    this.beatMachine = new BeatMachine(BPM)
     tracker = new Tracker(document.getElementById('myVideo'))
     VideoPlayer.setup(document.getElementById('myVideo'))
+}
+
+function mousePressed() {
+    if (this.beatMachine.isPlaying) {
+        this.beatMachine.stop()
+
+        this.instrumentGroups.forEach((instrumentGroup) => {
+            instrumentGroup.reset()
+        }, this)
+
+    } else {
+        this.beatMachine.start()
+    }
 }
 
 function setup() {
@@ -25,25 +38,12 @@ function setup() {
     })
 
     // This function is called when time ticks. (based on bpm)
-    this.timeMachine.onTick(() => {
+    this.beatMachine.onTick(() => {
 
         this.instrumentGroups.forEach((instrumentGroup) => {
             instrumentGroup.playNext()
         }, this)
 
     })
-}
-
-function mousePressed() {
-    if (this.timeMachine.isPlaying) {
-        this.timeMachine.stop()
-
-        this.instrumentGroups.forEach((instrumentGroup) => {
-            instrumentGroup.reset()
-        }, this)
-
-    } else {
-        this.timeMachine.start()
-    }
 }
 
