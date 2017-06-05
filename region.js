@@ -8,6 +8,7 @@ class Region {
         this.y = y
         this.width = size
         this.height = size
+        this.isLocked = false
     }
 
     collidesWith(other) {

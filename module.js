@@ -10,14 +10,11 @@ class Module {
     }
 
     update(trackingData) {
-        // Determine in wich instrument the data resides.
-        // If there is any change, make is so.
         this.regions.forEach((region) => {
-            // if the trackingdata resides within the region.
-            // Add a note to that index in the array.
             if (region.collidesWith(trackingData)) {
                 this.instruments[0].setAt(region.id)
-            } else {
+                region.isLocked = true
+            } else if (!region.isLocked) {
                 this.instruments[0].disableAt(region.id)
             }
         })
@@ -28,16 +25,21 @@ class Module {
     playNext(beatIndex) {
         this.instruments.forEach((instrument) => {
             instrument.play(beatIndex)
+            this.regions[beatIndex].isLocked = false
         });
     }
 
     show() {
+        clear()
         noFill()
-
         ellipseMode(CENTER)
 
         ellipse(this.x, this.y, this.width, this.height)
+
         this.regions.forEach((region) => {
+            if (region.isLocked) {
+                fill(255, 204, 0);
+            }
             ellipse(region.x, region.y, region.width, region.height)
         })
     }

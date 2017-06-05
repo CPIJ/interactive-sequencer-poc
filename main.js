@@ -32,7 +32,6 @@ function setup() {
 
         // tmp
         fill(255, 204, 0)
-        clear()
         rect(trackingData.x, trackingData.y, trackingData.width, trackingData.height)
 
         // Methode waarin ontdekt wordt waar de objecten zich bevinden.
@@ -45,19 +44,11 @@ function setup() {
 
     // This function is called when time ticks. (based on bpm)
     this.beatMachine.onTick(() => {
-
-        // TODO: Vervangen door een methode die niet afhankelijk is van statische arrays.
-        //
         this.modules.forEach((module) => {
             module.playNext(beatIndex)
         })
 
-        if (beatIndex < 3) {
-            beatIndex++
-        } else {
-            beatIndex = 0
-        }
-        
+        increment()
     })
 }
 
@@ -65,5 +56,13 @@ function draw() {
     this.modules.forEach((module) => {
         module.show()
     })
+}
+
+function increment() {
+    if (beatIndex < 3) {
+        beatIndex++
+    } else {
+        beatIndex = 0
+    }
 }
 
