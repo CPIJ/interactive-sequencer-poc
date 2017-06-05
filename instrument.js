@@ -4,7 +4,7 @@ class Instrument {
 
     constructor(patternBluePrint) {
         this.soundFiles = this.loadSounds()
-        this.pattern = this.loadPattern(patternBluePrint)
+        this.pattern = []
         this.currentIndex = 0
     }
 
@@ -16,6 +16,14 @@ class Instrument {
         }
 
         this.increment()
+    }
+
+    setAt(index) {
+        this.pattern[index] = DRUMS.KICK
+    }
+
+    disableAt(index) {
+        this.pattern[index] = NONE
     }
 
     increment() {

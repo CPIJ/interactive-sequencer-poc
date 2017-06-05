@@ -14,8 +14,16 @@ class Instrument {
         this.pattern = pattern
     }
 
+    setAt(index) {
+        this.pattern[index] = DRUMS.KICK
+    }
+
+    disableAt(index) {
+        this.pattern[index] = NONE
+    }
+
     play(beatCount) {
         let index = this.pattern[beatCount]
-        console.log(this.soundFile[index])
+        console.log(beatCount + ' ' + this.soundFile[index])
     }
 }
