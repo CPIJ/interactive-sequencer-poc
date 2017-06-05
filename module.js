@@ -45,9 +45,11 @@ class Module {
     }
 
     createRegions() {
-        return [new Region(0, this.height / 2, 50),
-        new Region(1, 450, this.width / 2),
-        new Region(2, this.height / 2, 450),
-        new Region(3, 50, this.height / 2)]
+        return [
+            new Region(0, this.height / 2, 50),
+            new Region(1, 450, this.width / 2),
+            new Region(2, this.height / 2, 450),
+            new Region(3, 50, this.height / 2)
+        ]
     }
 }

@@ -10,35 +10,15 @@ function preload() {
     VideoPlayer.setup(document.getElementById('myVideo'))
 }
 
-function mousePressed() {
-    if (this.beatMachine.isPlaying) {
-        this.beatMachine.stop()
-
-        this.instrumentGroups.forEach((instrumentGroup) => {
-            instrumentGroup.reset()
-        }, this)
-
-    } else {
-        this.beatMachine.start()
-    }
-}
-
 function setup() {
     createCanvas(500, 500)
     this.modules.push(new Module(width / 2, height / 2, 500, 500, [new Instrument()]))
 
     // This function is called when an object is tracked.
     tracker.onTrack(trackingData => {
-
-        // tmp
-        fill(255, 204, 0)
-        rect(trackingData.x, trackingData.y, trackingData.width, trackingData.height)
-
-        // Methode waarin ontdekt wordt waar de objecten zich bevinden.
-        // Op basis hiervan arrays genereren die afgespeeld kunnen worden in de 
-        // onTick() methode hieronder.
         modules.forEach((module) => {
             module.update(trackingData)
+            module.show()
         });
     })
 
@@ -53,9 +33,25 @@ function setup() {
 }
 
 function draw() {
-    this.modules.forEach((module) => {
-        module.show()
-    })
+
+    this.modules.map(m => m.show())
+
+    // this.modules.forEach((module) => {
+    //     module.show()
+    // })
+}
+
+function mousePressed() {
+    if (this.beatMachine.isPlaying) {
+        this.beatMachine.stop()
+
+        this.instrumentGroups.forEach((instrumentGroup) => {
+            instrumentGroup.reset()
+        }, this)
+
+    } else {
+        this.beatMachine.start()
+    }
 }
 
 function increment() {

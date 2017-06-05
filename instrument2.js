@@ -1,14 +1,8 @@
 class Instrument {
 
     constructor(pattern) {
-        // The locations of the soundfiles are loaded in memory.
         this.soundFile = this.loadSounds(['sounds/909/kick.wav'])
-
-        // Pattern that is going to be played.
-        // Consists of ordered indexes of the soundFile array.
-        // These are played in order, based on currentIndex.
         this.pattern = new Array(4)
-        console.log(this.pattern)
     }
 
     setPattern(pattern) {
@@ -36,8 +30,6 @@ class Instrument {
         locations.forEach((element) => {
             sounds.push(loadSound(element))
         }, this);
-
-        console.log(sounds)
 
         return sounds
     }
