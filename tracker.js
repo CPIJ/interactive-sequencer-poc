@@ -17,4 +17,13 @@ class Tracker {
 
         tracking.track(this.videoElement, this.colorTracker);
     }
+
+    determineModules(object) {
+        // Creates the modules needed to play sound.
+        // This is based on the location of the given object.
+
+        // Overrides where change has happened. 
+        // (places a note where a yellow label is, removes one where no label is present.)
+        // If there is no change, nothing happens.
+    }
 }

@@ -1,15 +1,10 @@
 const BPM = 128
-
-// var instrumentGroups = []
-// var kickPattern = [DRUMS.KICK, DRUMS.KICK, DRUMS.KICK, DRUMS.KICK, DRUMS.KICK, DRUMS.KICK, DRUMS.KICK, DRUMS.KICK]
-// var snarePattern = [NONE, DRUMS.SNARE, NONE, DRUMS.SNARE, NONE, DRUMS.SNARE, NONE, DRUMS.SNARE]
-
 let beatMachine
-let instruments = []
+var modules = []
 
 function preload() {
-    // this.instrumentGroups.push(new InstrumentGroup([kickPattern, snarePattern]))
     this.beatMachine = new BeatMachine(BPM)
+    this.modules.push(new Module(10, 10, 250, 250))
 
     tracker = new Tracker(document.getElementById('myVideo'))
     VideoPlayer.setup(document.getElementById('myVideo'))
@@ -32,12 +27,19 @@ function setup() {
     createCanvas(500, 500)
 
     // This function is called when an object is tracked.
-    tracker.onTrack(e => {
+    tracker.onTrack(trackingData => {
+
+        // tmp
+        fill(255, 204, 0)
+        clear()
+        rect(trackingData.x, trackingData.y, trackingData.width, trackingData.height)
 
         // Methode waarin ontdekt wordt waar de objecten zich bevinden.
         // Op basis hiervan arrays genereren die afgespeeld kunnen worden in de 
         // onTick() methode hieronder.
-
+        modules.forEach((module) => {
+            module.update(trackingData)
+        });
     })
 
     // This function is called when time ticks. (based on bpm)
@@ -45,10 +47,15 @@ function setup() {
 
         // TODO: Vervangen door een methode die niet afhankelijk is van statische arrays.
         //
-        // this.instrumentGroups.forEach((instrumentGroup) => {
-        //     instrumentGroup.playNext()
-        // }, this)
+        // this.modules.forEach((module) => {
+        //     module.playNext()
+        // })
+    })
+}
 
+function draw() {
+    this.modules.forEach((module) => {
+        module.show()
     })
 }
 
