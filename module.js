@@ -30,16 +30,12 @@ class Module {
     }
 
     show() {
-        clear()
         noFill()
         ellipseMode(CENTER)
 
         ellipse(this.x, this.y, this.width, this.height)
 
         this.regions.forEach((region) => {
-            if (region.isLocked) {
-                fill(255, 204, 0);
-            }
             ellipse(region.x, region.y, region.width, region.height)
         })
     }

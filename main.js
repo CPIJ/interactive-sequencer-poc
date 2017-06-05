@@ -16,11 +16,12 @@ function setup() {
 
     // This function is called when an object is tracked.
     tracker.onTrack(trackingData => {
+        rect(trackingData.x, trackingData.y, trackingData.width, trackingData.height)
         modules.forEach((module) => {
             module.update(trackingData)
-            module.show()
         });
     })
+
 
     // This function is called when time ticks. (based on bpm)
     this.beatMachine.onTick(() => {
@@ -33,12 +34,9 @@ function setup() {
 }
 
 function draw() {
-
-    this.modules.map(m => m.show())
-
-    // this.modules.forEach((module) => {
-    //     module.show()
-    // })
+    this.modules.forEach((module) => {
+        module.show()
+    })
 }
 
 function mousePressed() {
