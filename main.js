@@ -52,7 +52,7 @@ function setup() {
             module.playNext(beatIndex)
         })
 
-        if (beatIndex < 4) {
+        if (beatIndex < 3) {
             beatIndex++
         } else {
             beatIndex = 0
