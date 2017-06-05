@@ -4,8 +4,7 @@ var modules = []
 
 function preload() {
     this.beatMachine = new BeatMachine(BPM)
-    this.modules.push(new Module(10, 10, 250, 250))
-
+    
     tracker = new Tracker(document.getElementById('myVideo'))
     VideoPlayer.setup(document.getElementById('myVideo'))
 }
@@ -25,6 +24,7 @@ function mousePressed() {
 
 function setup() {
     createCanvas(500, 500)
+    this.modules.push(new Module(width / 2, height / 2, 500, 500))
 
     // This function is called when an object is tracked.
     tracker.onTrack(trackingData => {

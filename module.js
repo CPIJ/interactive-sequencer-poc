@@ -2,10 +2,10 @@ class Module {
 
     constructor(x, y, w, h, i) {
         this.x = x,
-        this.y = y,
-        this.width = w,
-        this.height = h,
-        this.instruments = (i == undefined ? [] : i)
+            this.y = y,
+            this.width = w,
+            this.height = h,
+            this.instruments = (i == undefined ? [] : i)
         this.regions = this.createRegions()
     }
 
@@ -22,7 +22,7 @@ class Module {
         })
     }
 
-    
+
     playNext(beatIndex) {
         this.instruments.forEach((instrument) => {
             instrument.play(beatIndex)
@@ -31,13 +31,19 @@ class Module {
 
     show() {
         noFill()
-        rect(this.x, this.y, this.width, this.height)
+
+        ellipseMode(CENTER)
+
+        ellipse(this.x, this.y, this.width, this.height)
         this.regions.forEach((region) => {
-            rect(region.x, region.y, region.width, region.height)
+            ellipse(region.x, region.y, region.width, region.height)
         })
     }
 
     createRegions() {
-        return [new Region(this.x + 100, this.y + 100)]
+        return [new Region(this.height / 2, 50),
+                new Region(450, this.width / 2),
+                new Region(this.height / 2, 450),
+                new Region(50, this.height / 2)]
     }
 }

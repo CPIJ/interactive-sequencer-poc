@@ -1,4 +1,4 @@
-const size = 10;
+const size = 50;
 
 class Region {
 
@@ -15,6 +15,4 @@ class Region {
             this.y < other.y + other.height &&
             this.height + this.y > other.y
     }
-
-
 }
